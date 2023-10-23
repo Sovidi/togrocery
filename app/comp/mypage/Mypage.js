@@ -22,10 +22,8 @@ function Mypage() {
     formData.append("id", sessData.id);
     const objData = Object.fromEntries(formData);
 
-    console.log(objData)
+    // console.log(objData)
     axios.put(`/api/mypage`, objData);
-    
-
   }
 
 
@@ -35,7 +33,7 @@ function Mypage() {
     personLd();
   }, [])
 
-
+console.log(person);
 
   if(!person[0]) return <>로딩중</>
 
