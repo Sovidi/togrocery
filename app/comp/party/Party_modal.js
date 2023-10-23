@@ -6,7 +6,7 @@ import styles from './party.module.scss';
 import { useRouter } from 'next/navigation';
 
 const Party_modal = () => {
-  const {matchData, setMatchData, KakaoMap, matchLd, sessData} = useContext(myContext);
+  const {matchData, setMatchData, KakaoMap, matchLd, sessData, logLd} = useContext(myContext);
   const [guestCount, setGuestCount] = useState(2);
   const [clickedPosition, setClickedPosition] = useState(null);
   const [clickedAddress, setClickedAddress] = useState(null);
