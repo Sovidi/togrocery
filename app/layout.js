@@ -13,6 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" type="image/png" sizes="16x16" href='/icons/windows11/Square44x44Logo.targetsize-16.png' />
+      </head>
       <body >
         <Context>
           <header></header>

@@ -1,5 +1,4 @@
 "use client"
-import { publicRuntimeConfig } from '@/next.config';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { createContext, useEffect, useState } from 'react'
