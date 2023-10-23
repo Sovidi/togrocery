@@ -100,6 +100,10 @@ const Party_modal = () => {
   }, [map]);
 
 
+  useEffect(()=>{
+    logLd();
+  }, [])
+
 
 
 
