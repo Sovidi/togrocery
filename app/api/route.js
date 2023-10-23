@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
