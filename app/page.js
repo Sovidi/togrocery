@@ -92,12 +92,12 @@ const imgMappings = {
           </Swiper>
         </div>
         <div className="sbox_wrap">
-          <div className="sch">
+          {/* <div className="sch">
             <input type="serch" placeholder="원하시는 품목을 검색해보세요"></input>
             <button type="submit">
               <img src="./asset/serc.png"></img>
             </button>
-          </div>
+          </div> */}
 
           <ul className="cate_list">
           {

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styles from './list.module.scss'
 import { useInView } from 'react-intersection-observer'
 import { myContext } from '../Context'
@@ -23,6 +23,13 @@ function List() {
   const [dItem, setDitem] = useState();
 
   const [detailon , setDetailon] = useState(false);
+
+  const elSInput = useRef();
+
+
+  const [searchV, setSearchV] = useState("");
+
+  // 입력란 값이 변경될 때 호출되는 이벤트 핸들러
 
 
 
@@ -50,6 +57,7 @@ function List() {
 
   const tap_click = (v) => {
     setTap(v);
+    console.log(elSInput.current.value)
 
     switch (v) {
       case '과일류':
@@ -64,6 +72,8 @@ function List() {
         return setData_list(data01.filter((obj) => (obj.category_name === "특용작물")));
       case '곡물/가공류':
         return setData_list(data01.filter((obj) => (obj.category_name === "식량작물")));
+      case "검색" : 
+        return setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(elSInput.current.value.toLowerCase())));
     }
   }
 
@@ -100,7 +110,7 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input type='text'></input><span><img src='/asset/sch.svg'></img></span>
+              <input ref={elSInput} onChange={()=>{tap_click("검색"), console.log()}} type='text'></input><span><img src='/asset/sch.svg'></img></span>
             </label>
           </div>
         </div>
