@@ -3,10 +3,13 @@ import React, { useContext, useEffect, useState } from "react";
 import styles from "./mypage.module.scss";
 import axios from "axios";
 import { myContext } from "../Context";
+import { useRouter } from "next/navigation";
 
 function Mypage() {
-  const {loginCk, sessData, logLd} = useContext(myContext);
+  const {loginCk, sessData, logLd, logout} = useContext(myContext);
   const [person, setPerson] = useState([]);
+
+  const router = useRouter();
 
 
   const personLd = async () => {
@@ -22,10 +25,9 @@ function Mypage() {
     formData.append("id", sessData.id);
     const objData = Object.fromEntries(formData);
 
-    console.log(objData)
     axios.put(`/api/mypage`, objData);
-    
-
+    logout();
+    router.push("/pages/login");
   }
 
 
@@ -35,7 +37,7 @@ function Mypage() {
     personLd();
   }, [])
 
-
+console.log(person);
 
   if(!person[0]) return <>로딩중</>
 
@@ -49,7 +51,7 @@ function Mypage() {
             <div className={styles.profileInfo}>
               <p className={styles.nickName}>{person[0].id}<span></span></p>
               <p className={styles.email}>{person[0].email}</p>
-            <button>로그아웃</button>
+            <button onClick={()=>{logout(); router.push("/pages/login")}}>로그아웃</button>
             </div>
         </div>
 

@@ -12,7 +12,7 @@ export async function PUT(req) {
     const qData = await req.json();
     console.log(qData);
 
-    const data = await queryExecute("update members set password=? where id=? AND password=?", [qData.apassword, qData.id, qData.bpassword]);
+    const data = await queryExecute("update members set password=? where id=? && password=?", [qData.apassword, qData.id, qData.bpassword]);
     console.log(data);
 
     return Response.json(data);

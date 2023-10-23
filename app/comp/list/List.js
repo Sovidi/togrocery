@@ -21,16 +21,7 @@ function List() {
   const tabName = paramsData.get("tab");
   const [tap, setTap] = useState(tabName);
   const [dItem, setDitem] = useState();
-
   const [detailon , setDetailon] = useState(false);
-
-  const elSInput = useRef();
-
-
-  const [searchV, setSearchV] = useState("");
-
-  // 입력란 값이 변경될 때 호출되는 이벤트 핸들러
-
 
 
   const checked = async (name) => {
@@ -54,11 +45,12 @@ function List() {
   }
 
 
+  const searching = (e) => {
+    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.target.value.toLowerCase())));
+  }
 
   const tap_click = (v) => {
     setTap(v);
-    console.log(elSInput.current.value)
-
     switch (v) {
       case '과일류':
         return setData_list(data01.filter((obj) => (obj.category_name === "과일류")));
@@ -72,8 +64,6 @@ function List() {
         return setData_list(data01.filter((obj) => (obj.category_name === "특용작물")));
       case '곡물/가공류':
         return setData_list(data01.filter((obj) => (obj.category_name === "식량작물")));
-      case "검색" : 
-        return setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(elSInput.current.value.toLowerCase())));
     }
   }
 
@@ -96,6 +86,7 @@ function List() {
   return (
     <section>
       <h2 className={styles.header}>장보는날</h2>
+      <p>실험용<input name='search' onChange={(e)=>{searching(e)}}/></p>
 
       <div ref={ref} className={styles.tap}>
         <ul>
@@ -110,7 +101,8 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input ref={elSInput} onChange={()=>{tap_click("검색"), console.log()}} type='text'></input><span><img src='/asset/sch.svg'></img></span>
+              <input type='text'/>
+              <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
         </div>

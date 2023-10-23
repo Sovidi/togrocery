@@ -1,6 +1,6 @@
 "use client"
 import axios from 'axios';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { createContext, useEffect, useState } from 'react'
 
 export const myContext = createContext(null);
@@ -28,6 +28,14 @@ function Context({children}) {
         sessionStorage.setItem("nickname", data.nickname);
       }
   }
+    
+  const logout = async () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("id");
+      sessionStorage.removeItem("nickname");
+    }
+  }
+
 
 
     const memberLd = async () => {
@@ -119,7 +127,7 @@ function Context({children}) {
 
 
   return (
-    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk}}>
+    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout}}>
         {children}
     </myContext.Provider>
   )
