@@ -25,10 +25,10 @@ function Footer() {
         <a href="">개인정보 처리방침</a>
         <a href="">오시는 길</a>
         </div>
-      <button class={styles.top_scroll} onClick={scrollToTop}>
-        <img src="./asset/arrow.png" alt="scroll to Top"></img>
+      <button class={`fixed ${styles.top_scroll}`} onClick={scrollToTop}>
+        <img src="/asset/arrow.png" alt="scroll to Top"></img>
       </button>
-      <div className={styles.foot_box}>
+      <div className={`fixed ${styles.foot_box}`}>
         <ul class Name={styles.icon}>
           <li>
             <Link href="/pages/party" className={styles.match}>

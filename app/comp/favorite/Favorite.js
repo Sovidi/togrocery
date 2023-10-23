@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer'
 import { myContext } from '../Context';
 import axios from 'axios';
 import imgname from '/public/list.json'
+import Detail from './../detail/Detail';
 
 
 
@@ -20,6 +21,8 @@ function Favorite() {
   const [lover_list, setLover_list] = useState([]);
   const [tap, setTap] = useState('전체');
   const [tapon, setTapon] = useState();
+  const [dItem, setDitem] = useState();
+  const [detailon , setDetailon] = useState(false);
 
 
   useEffect(()=>{
@@ -99,9 +102,9 @@ function Favorite() {
         </ul>
       </div>
 
-      <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+      {/* <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
         <p>Top</p>
-      </div>
+      </div> */}
 
       <div className={styles.con}>
 
@@ -109,7 +112,7 @@ function Favorite() {
           <ul>
             {
               data_list.map((v,k) => (
-                <li key={k} >
+                <li key={v.num} onClick={() => { setDitem(v) ; setDetailon(true) }}>
                   <figure>
                     <div>
                       <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
@@ -127,6 +130,14 @@ function Favorite() {
 
           </ul>
         </div>
+        {
+          (detailon) ? (
+            <div className={`${styles.pop} fixed`}>
+
+              <Detail dItem={dItem} close={()=>setDetailon(false)}/>
+            </div>
+          ) : ""
+        }
       </div>
     </section>
   )
