@@ -14,6 +14,9 @@ function Party() {
   const [address, setAddress] = useState('');
   const [filteredMatches, setFilteredMatches] = useState([]);
   const router = useRouter();
+  const [selectedItem, setSelectedItem] = useState(null);
+
+ 
 
 
   useEffect(()=>{
@@ -78,21 +81,14 @@ function Party() {
 
 
 
-
-  
   const handleCheckboxChange = (num) => {
-    setCheckedItems((prevCheckedItems) => {
-      const newCheckedItems = {};
-      if (!prevCheckedItems[num]) {
-        Object.keys(prevCheckedItems).forEach((key) => {
-          newCheckedItems[key] = false;
-        });
-        newCheckedItems[num] = true;
-      }
-      return newCheckedItems;
-    });
+    if (selectedItem === num) {
+      setSelectedItem(null);
+    } else {
+      setSelectedItem(num);
+    }
   };
-  
+
 
 
 
@@ -152,14 +148,16 @@ function Party() {
                   <p>{item.title} (1/{item.count})</p>
                   <p>{item.time} </p>
                 </div>
-                <input type='checkbox' checked={checkedItems[item.num] || false} onChange={() => handleCheckboxChange(item.num)} />
+                <button onClick={() => handleCheckboxChange(item.num)}>
+                  Select
+                </button>
               </div>
-              {checkedItems[item.num] && (
+              {selectedItem === item.num && (
                 <div className={styles.down}>
                   <p>주소 : {item.address}</p>
                   <div className={styles.center}>
-                    <KakaoMap setMap={setMap} lat={item.lat} lng={item.lng}  />
-                    <button onClick={()=>{goDetail(item.num)}}>자세히 보기</button>
+                    <KakaoMap setMap={setMap} lat={item.lat} lng={item.lng} />
+                    <button onClick={() => { goDetail(item.num) }}>자세히 보기</button>
                   </div>
                 </div>
               )}
