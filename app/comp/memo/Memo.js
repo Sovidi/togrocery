@@ -1,25 +1,14 @@
 'use client'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './memo.module.scss'
 import axios from 'axios';
-import { myContext } from '../Context';
 
 
 function Memo() {
-  const {sessData, loginCk} = useContext(myContext);
   const [memo, setmemo] = useState([]);
   const [CH_FT, setCH_FT] = useState([]);
   const inpyref = useRef();
-  // const id = sessData.id;
-
-  let id;
-  let nickname;
-  if (typeof window !== "undefined") {
-    id = sessionStorage.getItem("id");
-    nickname = sessionStorage.getItem("nickname");
-  }
-
-
+  const id = sessionStorage.getItem("id");
 
   // setmemo([{ text: 123456, check: true }, { text: 2123456, check: false }, { text: 1123456, check: false }])
   const memo_get = async () => {
@@ -30,9 +19,6 @@ function Memo() {
       })
   }
 
-  useEffect(()=>{
-    loginCk()
-  })
 
 
   const clickmemo = (v) => {

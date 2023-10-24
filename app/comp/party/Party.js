@@ -6,7 +6,9 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 function Party() {
-  const { matchData, setMatchData, KakaoMap, loginCk } = useContext(myContext);
+  const { matchData, setMatchData, KakaoMap } = useContext(
+    myContext
+  );
   const [map, setMap] = useState({});
   const [checkedItems, setCheckedItems] = useState({});
   const [latitude, setLatitude] = useState(null);
@@ -16,9 +18,6 @@ function Party() {
   const router = useRouter();
 
 
-  useEffect(()=>{
-    loginCk()
-  })
 
 
   //좌표빼기

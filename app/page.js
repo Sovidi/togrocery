@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import styles from "./page.module.scss";
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
@@ -15,20 +15,13 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay, Pagination, Navigation} from "swiper/modules";
-import { myContext } from "./comp/Context";
 
 
 
 
 export default function Home() {
-  const {loginCk} = useContext(myContext);
   const menu = ['과일류', '채소류', '수산물', '축산물', '버섯', '곡물/가공류']
   
-  useEffect(()=>{
-    loginCk()
-  })
-
-
 const imgMappings = {
   '과일류': '/asset/cate01.png',
   '채소류': '/asset/cate02.png',
@@ -92,12 +85,12 @@ const imgMappings = {
           </Swiper>
         </div>
         <div className="sbox_wrap">
-          {/* <div className="sch">
+          <div className="sch">
             <input type="serch" placeholder="원하시는 품목을 검색해보세요"></input>
             <button type="submit">
               <img src="./asset/serc.png"></img>
             </button>
-          </div> */}
+          </div>
 
           <ul className="cate_list">
           {
