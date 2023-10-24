@@ -23,8 +23,6 @@ function List() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
-  const [inpV, setInpV] = useState();
-
 
   const checked = async (name) => {
     const id = sessData.id;
@@ -48,7 +46,6 @@ function List() {
 
 
   const searching = (e) => {
-    setInpV(e.target.value);
     setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.target.value.toLowerCase())));
   }
 
@@ -89,7 +86,7 @@ function List() {
   return (
     <section>
       <h2 className={styles.header}>장보는날</h2>
-     
+    
 
       <div ref={ref} className={styles.tap}>
         <ul>
@@ -104,7 +101,7 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input type='text'/>
+              <input name='search' onChange={(e)=>{searching(e)}}/>
               <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
@@ -115,7 +112,7 @@ function List() {
 
         <div className={styles.input}>
           <label>
-            <input type='text' name='search' onChange={(e)=>{searching(e)}}></input><span><img src='/asset/sch.svg'></img></span>
+            <input name='search' onChange={(e)=>{searching(e)}}/><span><img src='/asset/sch.svg'></img></span>
           </label>
         </div>
 

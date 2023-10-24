@@ -49,25 +49,6 @@ const imgMappings = {
             <a href="">장보는 날</a>
           </h1>
         </div>
-        <div className="menu">
-          <ul className="gnb">
-            <li>
-              <a href="">홈</a>
-            </li>
-            <li>
-              <a href="">베스트</a>
-            </li>
-            <li>
-              <a href="">가격추이</a>
-            </li>
-            <li>
-              <a href="">물가변동</a>
-            </li>
-            <li>
-              <a href="">농수산 사고</a>
-            </li>
-          </ul>
-        </div>
       </header>
 
       <main>
