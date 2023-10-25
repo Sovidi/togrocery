@@ -38,11 +38,9 @@ function Favorite() {
       const d = await axios.delete(`/api/favorite?id=${id}&name=${name}`)
       console.log(d.data);
       setFNum(d.data)
-      
     }else{
       const a = await axios.post(`/api/favorite`, {id, name});
       setFNum(a.data)
-      
     }
   }
 

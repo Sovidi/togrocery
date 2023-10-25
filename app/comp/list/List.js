@@ -23,9 +23,16 @@ function List() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
+
+
 
   const checked = async (name) => {
-    const id = sessData.id;
 
     if (lover_list.includes(name)) {
       let a;
