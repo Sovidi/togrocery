@@ -23,11 +23,16 @@ function List() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
-  const [inpV, setInpV] = useState();
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
+
 
 
   const checked = async (name) => {
-    const id = sessData.id;
 
     if (lover_list.includes(name)) {
       let a;
@@ -48,8 +53,9 @@ function List() {
 
 
   const searching = (e) => {
-    setInpV(e.target.value);
-    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.target.value.toLowerCase())));
+    console.log(e.keyCode);
+    setTap(e)
+    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.toLowerCase())));
   }
 
   const tap_click = (v) => {
@@ -89,7 +95,6 @@ function List() {
   return (
     <section>
       <h2 className={styles.header}>장보는날</h2>
-     
 
       <div ref={ref} className={styles.tap}>
         <ul>
@@ -104,18 +109,19 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input type='text'/>
+              <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value) :""}/>
               <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
         </div>
-        <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+        {/* <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
           <p>Top</p>
-        </div>
+        </div> */}
 
         <div className={styles.input}>
           <label>
-            <input type='text' name='search' onChange={(e)=>{searching(e)}}></input><span><img src='/asset/sch.svg'></img></span>
+            <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value):""}/>
+              <span><img src='/asset/sch.svg'></img></span>
           </label>
         </div>
 
@@ -123,10 +129,10 @@ function List() {
           <ul>
             {
               data_list.map((v) => (
-                <li key={v.num} onClick={() => { setDitem(v) ; setDetailon(true) }}>
-                  <figure>
-                    <div>
+                <li key={v.num}>
                       <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
+                  <figure onClick={() => { setDitem(v) ; setDetailon(true) }}>
+                    <div>
                       <img src={`/asset/image/${imgname[v.item_name]}.png`} />
                     </div>
                     <figcaption>

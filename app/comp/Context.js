@@ -13,7 +13,6 @@ function Context({children}) {
     const [sessData, setSessData] = useState([]);
     const router = useRouter();
 
-
     const logLd = async () => {
       if (typeof window !== "undefined") {
         let id = sessionStorage.getItem("id");
@@ -35,8 +34,6 @@ function Context({children}) {
       sessionStorage.removeItem("nickname");
     }
   }
-
-
 
     const memberLd = async () => {
         axios.get("/api/member")
@@ -83,7 +80,6 @@ function Context({children}) {
       } 
     }
 
-
     function KakaoMap({ lat, lng, setMap }) {
       useEffect(() => {
         const script = document.createElement('script');
@@ -112,9 +108,7 @@ function Context({children}) {
       }, [lat, lng, setMap]);
     
       return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-  }
-      
-
+  }     
 
     useEffect(()=>{
         memberLd();
@@ -124,7 +118,6 @@ function Context({children}) {
         favStart();
         logLd();
     }, [])
-
 
   return (
     <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout}}>

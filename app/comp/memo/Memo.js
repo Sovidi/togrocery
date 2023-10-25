@@ -78,6 +78,12 @@ function Memo() {
 
         <div className={styles.list}>
           <ul>
+          <li className={styles.input}>
+            <label>
+              <button className={`${styles.Cbut} ${styles.green} ${styles.Plus}`}></button>
+              <input type='text' autofocus placeholder='메모를 입력해 주세요' onKeyDown={(e) => { e.key == 'Enter' ? key_Down(e) : "" }} ref={inpyref}></input>
+            </label>
+          </li>
             {
               memo.map((v, k) => (
                 <li key={k} className={`${styles.input}`} onClick={() => { clickmemo(v) }}>
@@ -88,17 +94,6 @@ function Memo() {
                 </li>
               ))
             }
-            <li className={styles.input}>
-              <label>
-                <button className={`${styles.Cbut} ${styles.green} ${styles.Plus}`}></button>
-                {
-                  !id ? 
-                <input type='text'  value={"로그인을 먼저 해주시기 바랍니다"}></input>
-                  :
-                <input type='text' onKeyDown={(e) => { e.key == 'Enter' ? key_Down(e) : "" }} ref={inpyref}></input>
-                }
-              </label>
-            </li>
           </ul>
           <button onClick={clear_but} className={`${styles.clear_but} fixed`} ></button>
         </div>

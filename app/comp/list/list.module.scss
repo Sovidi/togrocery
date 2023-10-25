@@ -117,9 +117,10 @@
         li {
             width: 140px;
             margin-bottom: 5%;
+            position: relative;
             figure {
                 >div{
-                    position: relative;
+
                     border:1px #79CC1D solid;
                     border-radius: 20px;
                     overflow: hidden;
