@@ -23,6 +23,7 @@ function List() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
+<<<<<<< HEAD
   let id;
   let nickname;
   if (typeof window !== "undefined") {
@@ -31,6 +32,8 @@ function List() {
   }
 
 
+=======
+>>>>>>> 21eb21d9f23a0601bbbee78d5db631d329110255
 
   const checked = async (name) => {
 
@@ -53,9 +56,13 @@ function List() {
 
 
   const searching = (e) => {
+<<<<<<< HEAD
     console.log(e.keyCode);
     setTap(e)
     setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.toLowerCase())));
+=======
+    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.target.value.toLowerCase())));
+>>>>>>> 21eb21d9f23a0601bbbee78d5db631d329110255
   }
 
   const tap_click = (v) => {
@@ -95,6 +102,10 @@ function List() {
   return (
     <section>
       <h2 className={styles.header}>장보는날</h2>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 21eb21d9f23a0601bbbee78d5db631d329110255
 
       <div ref={ref} className={styles.tap}>
         <ul>
@@ -109,7 +120,11 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
+<<<<<<< HEAD
               <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value) :""}/>
+=======
+              <input name='search' onChange={(e)=>{searching(e)}}/>
+>>>>>>> 21eb21d9f23a0601bbbee78d5db631d329110255
               <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
@@ -120,8 +135,12 @@ function List() {
 
         <div className={styles.input}>
           <label>
+<<<<<<< HEAD
             <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value):""}/>
               <span><img src='/asset/sch.svg'></img></span>
+=======
+            <input name='search' onChange={(e)=>{searching(e)}}/><span><img src='/asset/sch.svg'></img></span>
+>>>>>>> 21eb21d9f23a0601bbbee78d5db631d329110255
           </label>
         </div>
 
