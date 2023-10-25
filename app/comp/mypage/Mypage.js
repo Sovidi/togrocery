@@ -11,9 +11,17 @@ function Mypage() {
 
   const router = useRouter();
 
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
+
+
 
   const personLd = async () => {
-    await axios.get(`/api/mypage?id=${sessData.id}&nickname=${sessData.nickname}`)
+    await axios.get(`/api/mypage?id=${id}&nickname=${nickname}`)
     .then(res=>{
       setPerson(res.data);
     })
