@@ -49,7 +49,7 @@ const imgMappings = {
             <a href="">장보는 날</a>
           </h1>
         </div>
-        <div className="menu">
+        {/* <div className="menu">
           <ul className="gnb">
             <li>
               <a href="">홈</a>
@@ -67,7 +67,7 @@ const imgMappings = {
               <a href="">농수산 사고</a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </header>
 
       <main>
