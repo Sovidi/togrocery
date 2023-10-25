@@ -1,5 +1,4 @@
 "use client"
-
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './favorite.module.scss'
 import { useInView } from 'react-intersection-observer'
@@ -7,9 +6,6 @@ import { myContext } from '../Context';
 import axios from 'axios';
 import imgname from '/public/list.json'
 import Detail from './../detail/Detail';
-
-
-
 
 function Favorite() {
   const { ref, inView } = useInView();
@@ -24,16 +20,20 @@ function Favorite() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
+
 
   useEffect(()=>{
     loginCk()
   })
 
 
-
   const checked = async (name) => {
-    const id = sessData.id;
-
     if(lover_list.includes(name)) {
       const d = await axios.delete(`/api/favorite?id=${id}&name=${name}`)
       console.log(d.data);
