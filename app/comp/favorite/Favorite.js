@@ -1,18 +1,15 @@
 "use client"
-
 import React, { useContext, useEffect, useState } from 'react'
 import styles from './favorite.module.scss'
 import { useInView } from 'react-intersection-observer'
 import { myContext } from '../Context';
 import axios from 'axios';
 import imgname from '/public/list.json'
-
-
-
+import Detail from './../detail/Detail';
 
 function Favorite() {
   const { ref, inView } = useInView();
-  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum } = useContext(myContext);
+  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum, sessData, setSessData, logLd, logPush, loginCk } = useContext(myContext);
   const [data_list, setData_list] = useState([]);
   let data01 = contentsData.filter((obj) => (obj.product_cls_code === "01"))
   const [lover_data, setLover_Data] = useState([]);
@@ -20,22 +17,30 @@ function Favorite() {
   const [lover_list, setLover_list] = useState([]);
   const [tap, setTap] = useState('전체');
   const [tapon, setTapon] = useState();
+  const [dItem, setDitem] = useState();
+  const [detailon , setDetailon] = useState(false);
+
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
 
 
+  useEffect(()=>{
+    loginCk()
+  })
 
 
   const checked = async (name) => {
-    const id = sessionStorage.getItem("id");
-
     if(lover_list.includes(name)) {
       const d = await axios.delete(`/api/favorite?id=${id}&name=${name}`)
       console.log(d.data);
       setFNum(d.data)
-      
     }else{
       const a = await axios.post(`/api/favorite`, {id, name});
       setFNum(a.data)
-      
     }
   }
 
@@ -95,9 +100,9 @@ function Favorite() {
         </ul>
       </div>
 
-      <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+      {/* <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
         <p>Top</p>
-      </div>
+      </div> */}
 
       <div className={styles.con}>
 
@@ -105,7 +110,7 @@ function Favorite() {
           <ul>
             {
               data_list.map((v,k) => (
-                <li key={k} >
+                <li key={v.num} onClick={() => { setDitem(v) ; setDetailon(true) }}>
                   <figure>
                     <div>
                       <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
@@ -123,6 +128,14 @@ function Favorite() {
 
           </ul>
         </div>
+        {
+          (detailon) ? (
+            <div className={`${styles.pop} fixed`}>
+
+              <Detail dItem={dItem} close={()=>setDetailon(false)}/>
+            </div>
+          ) : ""
+        }
       </div>
     </section>
   )

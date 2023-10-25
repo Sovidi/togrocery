@@ -1,5 +1,6 @@
 "use client"
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import React, { createContext, useEffect, useState } from 'react'
 
 export const myContext = createContext(null);
@@ -9,7 +10,30 @@ function Context({children}) {
     const [contentsData, setContentsData] = useState([]);
     const [matchData, setMatchData] = useState([]);
     const [fNum, setFNum] = useState([]);
+    const [sessData, setSessData] = useState([]);
+    const router = useRouter();
 
+    const logLd = async () => {
+      if (typeof window !== "undefined") {
+        let id = sessionStorage.getItem("id");
+        let nickname = sessionStorage.getItem("nickname");
+        setSessData({id, nickname});
+      }
+    }
+
+    const logPush = async (data) => {
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("id", data.id);
+        sessionStorage.setItem("nickname", data.nickname);
+      }
+  }
+    
+  const logout = async () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.removeItem("id");
+      sessionStorage.removeItem("nickname");
+    }
+  }
 
     const memberLd = async () => {
         axios.get("/api/member")
@@ -48,7 +72,13 @@ function Context({children}) {
       })
   }
     
-
+    const loginCk = async () => {
+      if (typeof window !== "undefined") {
+        if(sessionStorage.getItem("id") == null || sessionStorage.getItem("nickname") == null) {
+          router.push("/pages/login")
+        }
+      } 
+    }
 
     function KakaoMap({ lat, lng, setMap }) {
       useEffect(() => {
@@ -78,9 +108,7 @@ function Context({children}) {
       }, [lat, lng, setMap]);
     
       return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-  }
-      
-
+  }     
 
     useEffect(()=>{
         memberLd();
@@ -88,12 +116,11 @@ function Context({children}) {
         matchLd();
         commentLd();
         favStart();
+        logLd();
     }, [])
 
-
-
   return (
-    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd}}>
+    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout}}>
         {children}
     </myContext.Provider>
   )

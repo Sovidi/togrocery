@@ -15,6 +15,7 @@ header{
     align-items: center;
     padding-left: 60px;
     padding-top: 35px;
+    padding-bottom: 35px;
   h1{
     font-size: 40px;
     font-weight: 500;
@@ -56,6 +57,7 @@ main{
     padding-right: 1.5rem;
     .swiper-wrapper{
       .swiper-slide{
+        cursor: pointer;
         img{
           width: 100% !important;
         
