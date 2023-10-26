@@ -26,8 +26,7 @@
     "react-intersection-observer": "^9.5.2",
     "react-kakao-maps-sdk": "^1.1.21",
     "rollup": "^2.79.1",
-    "sass": "^1.69.5",
-    "sass-loader": "^13.3.2",
+    "sass": "^1.69.3",
     "sweetalert2": "^11.7.32",
     "swiper": "^10.3.1",
     "uglify-js": "^3.17.4"
