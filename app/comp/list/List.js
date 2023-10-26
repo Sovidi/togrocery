@@ -111,7 +111,7 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value) :""}/>
+              <input type='text' placeholder='검색' onKeyDown={(e)=>e.key == 'Enter' ? searching(e.target.value) :""}/>
               <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
@@ -122,7 +122,7 @@ function List() {
 
         <div className={styles.input}>
           <label>
-            <input type='text' placeholder='검색' onKeyDown={(e)=>e.keyCode == 13 ? searching(e.target.value):""}/>
+            <input type='text' placeholder='검색' onKeyDown={(e)=>e.key == 'Enter' ? searching(e.target.value):""}/>
               <span><img src='/asset/sch.svg'></img></span>
           </label>
         </div>
