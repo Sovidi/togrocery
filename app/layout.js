@@ -1,9 +1,7 @@
 import './globals.scss'
 import Context from './comp/Context'
-import { Inter } from 'next/font/google'
 import Footer from './comp/footer/Footer'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: '장보러 가자',
