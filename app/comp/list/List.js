@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 
 
 function List() {
-  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum , sessData, loginCk} = useContext(myContext);
+  const { memberData, setMemberData, contentsData, favStart, setContentsData, fNum, setFNum , sessData, loginCk} = useContext(myContext);
   const menu = ['과일류', '채소류', '수산물', '축산물', '버섯', '곡물/가공류']
   const [lover_list, setLover_list] = useState([]);
   let data01 = contentsData.filter((obj) => (obj.product_cls_code === "01"))
@@ -41,19 +41,18 @@ function List() {
       })
 
       const d = await axios.delete(`/api/favorite?id=${id}&num=${a}`)
-      console.log(a);
       setFNum(d.data)
 
     } else {
       const a = await axios.post(`/api/favorite`, { id, name });
       setFNum(a.data)
+      console.log(a.data);
 
     }
   }
 
 
   const searching = (e) => {
-    console.log(e.keyCode);
     setTap(e)
     setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.toLowerCase())));
   }
@@ -89,8 +88,11 @@ function List() {
 
   useEffect(() => {
     setLover_list(fNum.map((v)=>(v.name)))
-    console.log(lover_list)
   }, [fNum])
+
+  useEffect(()=>{
+    favStart();
+  }, [])
 
   return (
     <section>
