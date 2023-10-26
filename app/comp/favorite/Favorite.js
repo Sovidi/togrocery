@@ -9,7 +9,7 @@ import Detail from './../detail/Detail';
 
 function Favorite() {
   const { ref, inView } = useInView();
-  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum, sessData, setSessData, logLd, logPush, loginCk } = useContext(myContext);
+  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum, sessData, setSessData, logLd, logPush, loginCk, favStart } = useContext(myContext);
   const [data_list, setData_list] = useState([]);
   let data01 = contentsData.filter((obj) => (obj.product_cls_code === "01"))
   const [lover_data, setLover_Data] = useState([]);
@@ -80,6 +80,9 @@ function Favorite() {
     tap_click('전체')
   }, [contentsData,lover_list])
 
+  useEffect(()=>{
+    favStart()
+  }, [])
   
 
   return (

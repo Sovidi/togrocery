@@ -66,9 +66,7 @@ function Context({children}) {
       const id = sessionStorage.getItem("id")
       await axios.get(`/api/favorite?id=${id}`)
       .then(res=>{
-      
-          setFNum(res.data)
-          
+          setFNum(res.data);
       })
   }
     
@@ -77,7 +75,7 @@ function Context({children}) {
         if(sessionStorage.getItem("id") == null || sessionStorage.getItem("nickname") == null) {
           router.push("/pages/login")
         }
-      } 
+      }
     }
 
     function KakaoMap({ lat, lng, setMap }) {
@@ -120,7 +118,7 @@ function Context({children}) {
     }, [])
 
   return (
-    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout}}>
+    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout, favStart}}>
         {children}
     </myContext.Provider>
   )
