@@ -41,7 +41,7 @@ const Party_modal = () => {
   };
 
   const handleDecrement = () => {
-    if (guestCount > 1) {
+    if (guestCount > 2) {
       setGuestCount(guestCount - 1);
     }
   };
@@ -114,10 +114,10 @@ const Party_modal = () => {
         <h3>입력하기</h3>
         <form onSubmit={handleSubmit}>
           <div className={styles.first}>
-            <div>
+            <figure>
               <img src="../asset/smilingface.png" alt="smiling face" />
-              <p>{sessData.nickname}</p> 
-            </div>
+              <figcaption>{sessData.nickname}</figcaption> 
+            </figure>
 
             <div>
               <label>
@@ -127,16 +127,6 @@ const Party_modal = () => {
               <label>
                 시간
                 <input required name="time" type="time" />
-              </label>
-              <label>
-                인원
-                <button type="button" onClick={handleDecrement}>
-                  -
-                </button>
-                {guestCount}
-                <button type="button" onClick={handleIncrement}>
-                  +
-                </button>
               </label>
               <label>
                 상세 내용

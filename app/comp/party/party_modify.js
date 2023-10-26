@@ -127,16 +127,6 @@ const Party_modify = () => {
                 <input required name="time" type="time" />
               </label>
               <label>
-                인원
-                <button type="button" onClick={handleDecrement}>
-                  -
-                </button>
-                {guestCount}
-                <button type="button" onClick={handleIncrement}>
-                  +
-                </button>
-              </label>
-              <label>
                 상세 내용
                 <textarea name="text" />
               </label>

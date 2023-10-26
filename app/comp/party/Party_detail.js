@@ -100,12 +100,12 @@ export default function Party_detail() {
               <div className={styles.flex}>
                 <div className={styles.face}>
                   <img src="/asset/smilingface.png"/>
-                  <p>{data[0].nickname}</p>
+                  <p><span className={styles.fontt}>작성자</span>  {data[0].nickname}</p>
                 </div>
                 
                 <div>
-                  <p>{data[0].title} (1/{data[0].count})</p>
-                  <p>{data[0].time}  ~</p>
+                  <p>{data[0].title}</p>
+                  <p><span className={styles.fontt}>{data[0].time}</span>예정</p>
                 </div>
                 <button onClick={(e)=>{modify(e)}}>수정</button>
               </div>               
@@ -116,20 +116,6 @@ export default function Party_detail() {
       
             
       <ul>
-      <p>댓글 {commentsData.length} 개</p>
-      {commentsData.map((item) => (
-
-            <li onLoad={(e)=>{ownercolor(e, item.id)}} key={item.num} >
-              <img src="/asset/smilingface.png" alt="smiling face" />
-              <div className={styles.smile}>
-                <p>{item.id}</p>
-                <p>{item.text}</p>
-              </div>
-                
-            </li>
-         
-          ))}
-      </ul>
       <form onSubmit={writing}>
         <input required 
           name='text'
@@ -137,6 +123,23 @@ export default function Party_detail() {
         />
         <button>등록</button>
       </form>
+      <p className={styles.length}>댓글 {commentsData.length} 개</p>
+      {commentsData.map((item) => (
+
+            <li  onLoad={(e)=>{ownercolor(e, item.id)}} key={item.num} >
+              
+              <div className={styles.smile}>
+                <img src="/asset/smilingface.png" alt="smiling face" />
+              </div>
+              <div className={styles.comment}>
+                <p>{item.id}</p>  
+                <p> {item.text} </p>
+              </div>
+            </li>
+         
+          ))}
+      </ul>
+      
   
     </section>
             
