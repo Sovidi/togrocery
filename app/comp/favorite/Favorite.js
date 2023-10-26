@@ -18,7 +18,7 @@ function Favorite() {
   const [tap, setTap] = useState('전체');
   const [tapon, setTapon] = useState();
   const [dItem, setDitem] = useState();
-  const [detailon , setDetailon] = useState(false);
+  const [detailon, setDetailon] = useState(false);
 
   let id;
   let nickname;
@@ -28,19 +28,27 @@ function Favorite() {
   }
 
 
-  useEffect(()=>{
+  useEffect(() => {
     loginCk()
   })
 
 
   const checked = async (name) => {
-    if(lover_list.includes(name)) {
-      const d = await axios.delete(`/api/favorite?id=${id}&name=${name}`)
-      console.log(d.data);
+
+    if (lover_list.includes(name)) {
+      let a;
+      let b=[];
+      fNum.map((v) => {
+        if (v.name == name){a = v.num}
+      })
+      const d = await axios.delete(`/api/favorite?id=${id}&num=${a}`)
       setFNum(d.data)
-    }else{
-      const a = await axios.post(`/api/favorite`, {id, name});
+
+
+    } else {
+      const a = await axios.post(`/api/favorite`, { id, name });
       setFNum(a.data)
+
     }
   }
 
@@ -49,12 +57,12 @@ function Favorite() {
     console.log(lover_list)
     setTapon(v)
     const aa = [];
-    lover_list.forEach((item)=>{
-      const a= data01.filter(obj=>(obj.item_name == item))
+    lover_list.forEach((item) => {
+      const a = data01.filter(obj => (obj.item_name == item))
       aa.push(...a)
     })
     setLover_Data(aa)
-    
+
 
     setTap(v);
     switch (v) {
@@ -74,16 +82,16 @@ function Favorite() {
     setLover_list(fNum.map((v) => (v.name)))
   }, [fNum])
 
-  
+
 
   useEffect(() => {
     tap_click('전체')
-  }, [contentsData,lover_list])
+  }, [contentsData, lover_list])
 
-  useEffect(()=>{
+  useEffect(() => {
     favStart()
   }, [])
-  
+
 
   return (
     <section>
@@ -92,7 +100,7 @@ function Favorite() {
       <div ref={ref} className={styles.tap}>
         <ul>
           {menu.map((v, k) => (
-              <li key={k} onClick={() => { tap_click(v) }} className={tapon == v ? styles.on:""}>
+            <li key={k} onClick={() => { tap_click(v) }} className={tapon == v ? styles.on : ""}>
               <figure>
                 <p><img src='/asset/hart_whit.svg'></img></p>
                 <figcaption>{v}</figcaption>
@@ -111,12 +119,13 @@ function Favorite() {
 
         <div className={styles.list}>
           <ul>
+
             {
-              data_list.map((v,k) => (
-                <li key={v.num} onClick={() => { setDitem(v) ; setDetailon(true) }}>
-                  <figure>
+              data_list.map((v, k) => (
+                <li key={v.num} >
+                  <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
+                  <figure onClick={() => { setDitem(v); setDetailon(true) }}>
                     <div>
-                      <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
                       <img src={`/asset/image/${imgname[v.item_name]}.png`} />
                     </div>
                     <figcaption>
@@ -135,7 +144,7 @@ function Favorite() {
           (detailon) ? (
             <div className={`${styles.pop} fixed`}>
 
-              <Detail dItem={dItem} close={()=>setDetailon(false)}/>
+              <Detail dItem={dItem} close={() => setDetailon(false)} />
             </div>
           ) : ""
         }

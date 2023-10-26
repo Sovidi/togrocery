@@ -30,8 +30,8 @@ function Detail({ dItem , close}) {
                 <figcaption>
                     <h2>{dItem.item_name}</h2>
                     <div>
-                    <p>소매가 : {dItem.dpr3 ? dItem.dpr3 +"원": "데이터가 없습니다"}</p>
-                    <p>도매가 : {dItem.도매 ? dItem.도매.dpr3 +"원": "데이터가 없습니다"}</p>
+                    <p>소매가 : {dItem.dpr3.length != 0 ? dItem.unit+"당 " + dItem.dpr3 +"원": "데이터가 없습니다"}</p>
+                    <p>도매가 : {dItem.도매 && dItem.도매.dpr3.length != 0 ? dItem.도매.unit+"당 " + dItem.도매.dpr3 +"원": "데이터가 없습니다"}</p>
                     <p>1년전 평균가 : {dItem.dpr4 ? dItem.dpr4 +"원" : "데이터가 없습니다"}</p>
                     <p>작년 대비 : <span className={dItem.direction == 0 ? styles.swit_0: (dItem.direction == 1)? styles.swit_1: ''}>{upDown}</span></p>
                     </div>
