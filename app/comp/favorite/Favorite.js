@@ -46,9 +46,8 @@ function Favorite() {
 
 
     } else {
-      const a = await axios.post(`/api/favorite`, { id, name });
+      const a = await axios.post(`/api/favorite`, { id, name })
       setFNum(a.data)
-
     }
   }
 

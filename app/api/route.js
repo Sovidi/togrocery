@@ -10,6 +10,7 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+
 export async function queryExecute(str, value) {
 	let data = await new Promise((resolve, reject) => {
 		connection.query(str, value, function (error, results) {
