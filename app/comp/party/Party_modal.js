@@ -15,6 +15,12 @@ const Party_modal = () => {
 
   const router = useRouter();
 
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,8 +29,8 @@ const Party_modal = () => {
     formData.append('lng', clickedPosition.lng);
     formData.append('lat', clickedPosition.lat);
     formData.append('address', clickedAddress);
-    formData.append("id", sessData.id);
-    formData.append("nickname", sessData.nickname);
+    formData.append("id", id);
+    formData.append("nickname", nickname);
     let objData = Object.fromEntries(formData);
   
     console.log(objData);
@@ -116,7 +122,7 @@ const Party_modal = () => {
           <div className={styles.first}>
             <figure>
               <img src="../asset/smilingface.png" alt="smiling face" />
-              <figcaption>{sessData.nickname}</figcaption> 
+              <figcaption>작성자 {nickname}</figcaption> 
             </figure>
 
             <div>
@@ -127,6 +133,16 @@ const Party_modal = () => {
               <label>
                 시간
                 <input required name="time" type="time" />
+              </label>
+              <label>
+                인원
+                <button type="button" onClick={handleDecrement}>
+                  -
+                </button>
+                {guestCount}
+                <button type="button" onClick={handleIncrement}>
+                  +
+                </button>
               </label>
               <label>
                 상세 내용
@@ -140,7 +156,7 @@ const Party_modal = () => {
           
           <div className={styles.mapp}>
           {clickedAddress && <p>주소: {clickedAddress}</p>}
-            <KakaoMap lat={currentPosition?.lat} lng={currentPosition?.lng} setMap={setMap}/>
+            <KakaoMap lat={currentPosition?.lat} lng={currentPosition?.lng} setMap={setMap} draggable={true} zoomable={true}/>
             <button className={styles.success}>완료</button>
           </div>
         </form>

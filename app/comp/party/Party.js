@@ -15,13 +15,9 @@ function Party() {
   const [selectedItem, setSelectedItem] = useState(null);
   const router = useRouter();
 
- 
-
-
   useEffect(()=>{
-    loginCk()
+    loginCk();
   })
-
 
   //좌표빼기
   const geo = () => {
@@ -79,7 +75,6 @@ function Party() {
 
 
 
-
   const handleCheckboxChange = (num) => {
     if (selectedItem === num) {
       setSelectedItem(null);
@@ -99,6 +94,7 @@ function Party() {
     e.preventDefault();
     router.push(`/pages/matchmaking`);
   };
+
 
 
 
@@ -127,12 +123,10 @@ function Party() {
       </div>
 
       <div className={styles.address}>
-
-           <p>현재 위치 : {address}</p> 
-
+        <p>현재 위치 : {address}</p> 
         <img onClick={geo} src="../asset/rotate.png" alt="회전" />
-        <p>1.5km 반경 안에 있는 매칭이 보입니다.</p>
       </div>
+      <p className={styles.grayfont}>1.5km 반경 안에 있는 매칭이 보입니다.</p>
 
       <div>
         <ul className={styles.group}>
@@ -142,7 +136,7 @@ function Party() {
                 
                 <div className={styles.size}>
                   <p>작성자 <span className={styles.font}>{item.id}</span> </p>
-                  <p><span className={styles.font}>{item.title}</span> </p>
+                  <p><span className={styles.font}>{item.title}</span>({item.mCount ? item.mCount : "1"}/{item.count}) 명</p>
                   <p><span className={styles.font}>약속시간</span> {item.time} </p>
                 </div>
                 <button
@@ -156,8 +150,8 @@ function Party() {
                 <div className={styles.down}>
                   <p>출발 장소 : {item.address}</p>
                   <div className={styles.center}>
-                    <KakaoMap setMap={setMap} lat={item.lat} lng={item.lng}/>
-                    <button onClick={() => { goDetail(item.num) }}>참여하기</button>
+                    <KakaoMap setMap={setMap} lat={item.lat} lng={item.lng} draggable={false} zoomable={false}/>
+                    <button onClick={() => { goDetail(item.num) }}>자세히 보기</button>
                   </div>
                 </div>
               )}

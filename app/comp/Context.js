@@ -78,7 +78,7 @@ function Context({children}) {
       }
     }
 
-    function KakaoMap({ lat, lng, setMap }) {
+    function KakaoMap({ lat, lng, setMap, draggable, zoomable }) {
       useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
@@ -100,10 +100,13 @@ function Context({children}) {
               position: markerPosition,
             });
             marker.setMap(map); // 지도에 마커 표시
+            map.setDraggable(draggable);
+            // zoomable 값에 따라 지도의 확대 기능을 설정
+            map.setZoomable(zoomable);
             setMap(map); // setMap 함수를 사용하여 map 상태를 설정
           });
         });
-      }, [lat, lng, setMap]);
+      }, [lat, lng, setMap, draggable, zoomable]);
     
       return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
   }     
