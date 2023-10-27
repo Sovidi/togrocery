@@ -138,7 +138,7 @@ export default function Home() {
               itemData.map((v) => (
                 <li key={v.num}>
                   <figure className="pic">
-                    <img src={`/asset/image/${imgname[v.item_name]}.png`}></img>
+                    <img src={`/asset/image/${imgname[v.item_name] ? imgname[v.item_name] : "mainlogo"}.png`}></img>
                   </figure>
                   <div className="txt">
                     <strong className="name">
