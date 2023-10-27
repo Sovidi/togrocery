@@ -26,7 +26,7 @@ function Detail({ dItem , close}) {
     return (
         <div className={styles.pop_D}>
             <figure>
-                <p><img src={`/asset/image/${imgname[dItem.item_name]}.png`}></img></p>
+                <p><img src={`/asset/image/${imgname[dItem.item_name] ? imgname[dItem.item_name] : "mainlogo"}.png`}></img></p>
                 <figcaption>
                     <h2>{dItem.item_name}</h2>
                     <div>

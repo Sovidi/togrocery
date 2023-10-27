@@ -125,7 +125,7 @@ function Favorite() {
                   <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
                   <figure onClick={() => { setDitem(v); setDetailon(true) }}>
                     <div>
-                      <img src={`/asset/image/${imgname[v.item_name]}.png`} />
+                      <img src={`/asset/image/${imgname[v.item_name] ? imgname[v.item_name] : "mainlogo"}.png`} />
                     </div>
                     <figcaption>
                       <p>{v.item_name}</p>
