@@ -83,6 +83,7 @@
 }
 
 .lover{
+    z-index: 1;
     position:absolute;
     top: 5%;
     right: 5%;
@@ -120,7 +121,7 @@
         li {
             width: 140px;
             margin-bottom: 5%;
-
+            position: relative;
             figure {
                 >div {
                     position: relative;

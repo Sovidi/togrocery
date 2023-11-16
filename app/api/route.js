@@ -1,14 +1,15 @@
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-	host: 'svc.sel5.cloudtype.app',
-	user: 'root',
-	password: '1324',
-	database: 'test',
-	port: "31944"
+	host: process.env.NEXT_PUBLIC_HOST,
+	user: process.env.NEXT_PUBLIC_USER,
+	password: process.env.NEXT_PUBLIC_PASSWORD,
+	database: process.env.NEXT_PUBLIC_DATABASE,
+	port: process.env.NEXT_PUBLIC_PORT
 });
 
 connection.connect();
+
 
 export async function queryExecute(str, value) {
 	let data = await new Promise((resolve, reject) => {

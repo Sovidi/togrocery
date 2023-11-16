@@ -13,7 +13,6 @@ function Context({children}) {
     const [sessData, setSessData] = useState([]);
     const router = useRouter();
 
-
     const logLd = async () => {
       if (typeof window !== "undefined") {
         let id = sessionStorage.getItem("id");
@@ -35,8 +34,6 @@ function Context({children}) {
       sessionStorage.removeItem("nickname");
     }
   }
-
-
 
     const memberLd = async () => {
         axios.get("/api/member")
@@ -69,9 +66,7 @@ function Context({children}) {
       const id = sessionStorage.getItem("id")
       await axios.get(`/api/favorite?id=${id}`)
       .then(res=>{
-      
-          setFNum(res.data)
-          
+          setFNum(res.data);
       })
   }
     
@@ -80,11 +75,10 @@ function Context({children}) {
         if(sessionStorage.getItem("id") == null || sessionStorage.getItem("nickname") == null) {
           router.push("/pages/login")
         }
-      } 
+      }
     }
 
-
-    function KakaoMap({ lat, lng, setMap }) {
+    function KakaoMap({ lat, lng, setMap, draggable, zoomable }) {
       useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
@@ -106,15 +100,16 @@ function Context({children}) {
               position: markerPosition,
             });
             marker.setMap(map); // 지도에 마커 표시
+            map.setDraggable(draggable);
+            // zoomable 값에 따라 지도의 확대 기능을 설정
+            map.setZoomable(zoomable);
             setMap(map); // setMap 함수를 사용하여 map 상태를 설정
           });
         });
-      }, [lat, lng, setMap]);
+      }, [lat, lng, setMap, draggable, zoomable]);
     
       return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-  }
-      
-
+  }     
 
     useEffect(()=>{
         memberLd();
@@ -125,9 +120,8 @@ function Context({children}) {
         logLd();
     }, [])
 
-
   return (
-    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout}}>
+    <myContext.Provider value={{memberData, setMemberData, contentsData, setContentsData, matchData, setMatchData, KakaoMap, fNum, setFNum, matchLd, sessData, setSessData, logLd, logPush, loginCk, logout, favStart}}>
         {children}
     </myContext.Provider>
   )

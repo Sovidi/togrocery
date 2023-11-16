@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <link rel="icon" type="image/png" sizes="16x16" href='/icons/windows11/Square44x44Logo.targetsize-16.png' />
+        <link rel="icon" type="image/png" sizes="16x16" href='/favicon-16x16.png' />
       </head>
       <body >
         <Context>

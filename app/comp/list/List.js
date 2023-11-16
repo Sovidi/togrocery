@@ -8,10 +8,11 @@ import axios from 'axios'
 import imgname from '/public/list.json'
 import Detail from '../detail/Detail'
 import { useSearchParams } from 'next/navigation';
+import logo from "/public/asset/mainlogo.png"
 
 
 function List() {
-  const { memberData, setMemberData, contentsData, setContentsData, fNum, setFNum , sessData, loginCk} = useContext(myContext);
+  const { memberData, setMemberData, contentsData, favStart, setContentsData, fNum, setFNum , sessData, loginCk} = useContext(myContext);
   const menu = ['과일류', '채소류', '수산물', '축산물', '버섯', '곡물/가공류']
   const [lover_list, setLover_list] = useState([]);
   let data01 = contentsData.filter((obj) => (obj.product_cls_code === "01"))
@@ -23,9 +24,16 @@ function List() {
   const [dItem, setDitem] = useState();
   const [detailon , setDetailon] = useState(false);
 
+  let id;
+  let nickname;
+  if (typeof window !== "undefined") {
+    id = sessionStorage.getItem("id");
+    nickname = sessionStorage.getItem("nickname");
+  }
+
+
 
   const checked = async (name) => {
-    const id = sessData.id;
 
     if (lover_list.includes(name)) {
       let a;
@@ -34,19 +42,20 @@ function List() {
       })
 
       const d = await axios.delete(`/api/favorite?id=${id}&num=${a}`)
-      console.log(a);
       setFNum(d.data)
 
     } else {
       const a = await axios.post(`/api/favorite`, { id, name });
       setFNum(a.data)
+      console.log(a.data);
 
     }
   }
 
 
   const searching = (e) => {
-    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.target.value.toLowerCase())));
+    setTap(e)
+    setData_list(data01.filter((obj) => obj.item_name.toLowerCase().includes(e.toLowerCase())));
   }
 
   const tap_click = (v) => {
@@ -80,13 +89,15 @@ function List() {
 
   useEffect(() => {
     setLover_list(fNum.map((v)=>(v.name)))
-    console.log(lover_list)
   }, [fNum])
+
+  useEffect(()=>{
+    favStart();
+  }, [])
 
   return (
     <section>
       <h2 className={styles.header}>장보는날</h2>
-      <p>실험용<input name='search' onChange={(e)=>{searching(e)}}/></p>
 
       <div ref={ref} className={styles.tap}>
         <ul>
@@ -101,18 +112,19 @@ function List() {
         <div className={`${!inView ? styles.on : ""} ${styles.input_sub} `}>
           <div className={styles.input}>
             <label>
-              <input type='text'/>
+              <input type='text' placeholder='검색' onKeyDown={(e)=>e.key == 'Enter' ? searching(e.target.value) :""}/>
               <span><img src='/asset/sch.svg'/></span>
             </label>
           </div>
         </div>
-        <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
+        {/* <div className={`fixed ${styles.top} ${!inView ? styles.on : ""}`} onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
           <p>Top</p>
-        </div>
+        </div> */}
 
         <div className={styles.input}>
           <label>
-            <input type='text'></input><span><img src='/asset/sch.svg'></img></span>
+            <input type='text' placeholder='검색' onKeyDown={(e)=>e.key == 'Enter' ? searching(e.target.value):""}/>
+              <span><img src='/asset/sch.svg'></img></span>
           </label>
         </div>
 
@@ -120,11 +132,11 @@ function List() {
           <ul>
             {
               data_list.map((v) => (
-                <li key={v.num} onClick={() => { setDitem(v) ; setDetailon(true) }}>
-                  <figure>
-                    <div>
+                <li key={v.num}>
                       <span onClick={() => { checked(v.item_name) }} className={`${lover_list.includes(v.item_name) ? styles.on : ""} ${styles.lover}`}></span>
-                      <img src={`/asset/image/${imgname[v.item_name]}.png`} />
+                  <figure onClick={() => { setDitem(v) ; setDetailon(true) }}>
+                    <div>
+                      <img src={`/asset/image/${imgname[v.item_name] ? imgname[v.item_name] : "mainlogo"}.png`} />
                     </div>
                     <figcaption>
                       <p>{v.item_name}</p>
