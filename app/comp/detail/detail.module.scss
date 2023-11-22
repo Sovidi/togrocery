@@ -1,7 +1,8 @@
 .pop_D{
+    max-height: 75%;
     width: 80%;
     border-radius: var(--small);
-    overflow: hidden;
+    overflow: scroll;
     background-color: white;
     figure{
         >p{ 
@@ -37,6 +38,7 @@
     }
     >p{
         padding-right: var(--small);
+        font-size: var(--small);
         text-align: end;
     }
     button{
