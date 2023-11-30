@@ -82,9 +82,8 @@ function Context({children}) {
       useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
-        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${'b03af3865fb67ef929f3f6d0c5b0d83c'}&libraries=services,clusterer&autoload=false`;
+        script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${'98f60b92e740fcc09c63e1118a093970'}&libraries=services,clusterer&autoload=false`;
         document.head.appendChild(script);
-    
         script.addEventListener('load', () => {
           window.kakao.maps.load(() => {
             const container = document.getElementById('map');
@@ -94,7 +93,6 @@ function Context({children}) {
             };
             const map = new window.kakao.maps.Map(container, options);
             const markerPosition = new kakao.maps.LatLng(lat, lng);
-
             // 해당 위치를 사용하여 마커 생성
             const marker = new kakao.maps.Marker({
               position: markerPosition,
@@ -109,7 +107,7 @@ function Context({children}) {
       }, [lat, lng, setMap, draggable, zoomable]);
     
       return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-  }     
+  }
 
     useEffect(()=>{
         memberLd();
