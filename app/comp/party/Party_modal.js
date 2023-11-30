@@ -57,12 +57,14 @@ const Party_modal = () => {
     if(map) {
       let marker; // 마커 변수를 지역 변수로 선언
 
+      // 클릭된 위치 좌표 따기
         window.kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
           const latlng = mouseEvent.latLng;
           const latitude = latlng.getLat();
           const longitude = latlng.getLng();
           setClickedPosition({ lat: latitude, lng: longitude });
 
+          // 클릭된 위치 좌표 주소로 바꿔서 저장
           const geocoder = new window.kakao.maps.services.Geocoder();
           geocoder.coord2Address(longitude, latitude, (result, status) => {
             if (status === window.kakao.maps.services.Status.OK) {
