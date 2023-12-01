@@ -53,10 +53,9 @@ const Party_modal = () => {
   };
 
   useEffect(() => {
-
     if(map) {
       let marker; // 마커 변수를 지역 변수로 선언
-
+      
       // 클릭된 위치 좌표 따기
         window.kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
           const latlng = mouseEvent.latLng;
