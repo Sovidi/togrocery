@@ -8,8 +8,9 @@ export var connection = mysql.createConnection({
 	port: process.env.S_PORT
 });
 
+connection.connect();
+
 export async function queryExecute(str, value) {
-	connection.connect();
 	let data = await new Promise((resolve, reject) => {
 		connection.query(str, value, function (error, results) {
 			resolve(results);
