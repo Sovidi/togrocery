@@ -1,10 +1,13 @@
-import { Ruthie } from "next/font/google";
 import { queryExecute } from "../route";
+import { connection } from "../route";
+
 
 export async function GET(req) {
     let qData = Object.fromEntries(req.nextUrl.searchParams)
 
     let data = await queryExecute("select * from favorite where id=?", [qData.id]);
+
+    connection.end();
     return Response.json(data);
 }
 
@@ -14,6 +17,7 @@ export async function POST(req) {
     await queryExecute("insert into favorite (id, name) values (?, ?)", [data.id, data.name])
     const getData =  await queryExecute("select * from favorite where id=?",[data.id])
 
+    connection.end();
     return Response.json(getData);
 }
 
@@ -22,7 +26,7 @@ export async function DELETE(req) {
 
     await queryExecute("delete from favorite where id=? && num=?", [qData.id, qData.num])
     const getData = await queryExecute("select * from favorite where id=?",[qData.id])
-
     
+    connection.end();
     return Response.json(getData);
 }
