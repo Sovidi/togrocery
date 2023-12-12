@@ -6,6 +6,7 @@ export async function GET(req) {
 
     let data = await queryExecute("select * from memo where id=?", [qData.id]);
 
+    connection.end();
     return Response.json(data);
 }
 
@@ -16,6 +17,7 @@ export async function POST(req) {
     await queryExecute("insert into memo (id, text, ch) values (?, ?, ?)", [data.id, data.text, data.ch]);
     const newData = await queryExecute("select * from memo where id=?", [data.id]);
 
+    connection.end();
     return Response.json(newData);
 }
 
@@ -25,5 +27,6 @@ export async function DELETE(req) {
     await queryExecute(`delete from memo where num in (${num})`)
     const getData = await queryExecute("select * from memo where id=?",[id]);
 
+    connection.end();
     return Response.json(getData);
 }

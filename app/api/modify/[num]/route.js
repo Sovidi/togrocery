@@ -6,9 +6,9 @@ export async function GET(req, {params}) {
 
     let data = await queryExecute("select * from new_match where num=? && id=?", [params.num, qData.id]);
 
+    connection.end();
     if(data.length > 0) {return Response.json(true)}
     else {return Response.json(false)}
-    
 }
 
 export async function PUT(req, {params}) {
@@ -17,6 +17,7 @@ export async function PUT(req, {params}) {
 
     const data = await queryExecute("update new_match set title=?, time=?, count=?, lng=?, lat=?, address=?, text=? where id=? AND num=?", [qData.title, qData.time, qData.count, qData.lng, qData.lat, qData.address, qData.text, qData.id, params.num])
 
+    connection.end();
     if (data.length > 0) return Response.json("바뀜");
     else {return Response.json("안바뀜")}
 }
