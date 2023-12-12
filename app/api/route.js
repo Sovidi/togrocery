@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
+export var connection = mysql.createConnection({
 	host: process.env.S_HOST,
 	user: process.env.S_USER,
 	password: process.env.S_PASSWORD,
