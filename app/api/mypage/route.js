@@ -7,7 +7,7 @@ export async function GET(req) {
 
     const data = await queryExecute("select * from members where id=? && nickname=?", [qData.id, qData.nickname]);
 
-    connection.end();
+    await connection.end();
     return Response.json(data);
 }
 
@@ -18,6 +18,6 @@ export async function PUT(req) {
     const data = await queryExecute("update members set password=? where id=? && password=?", [qData.apassword, qData.id, qData.bpassword]);
     console.log(data);
 
-    connection.end();
+    await connection.end();
     return Response.json(data);
 }
