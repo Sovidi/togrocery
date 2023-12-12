@@ -6,6 +6,5 @@ export async function GET(req, {params}) {
 
     const data = await queryExecute('select * from members where id=? && password=?', [qData.id, qData.password]);
 
-    connection.end();
     return Response.json(data);
 }

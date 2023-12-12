@@ -6,7 +6,6 @@ export async function GET(req) {
 
     const data = await queryExecute(`select * from members where id=?`, [qData.id]);
 
-    connection.end();
     if (data.length) {return Response.json(true)}
     else {return Response.json(false);
 }}
