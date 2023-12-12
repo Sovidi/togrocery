@@ -6,13 +6,11 @@ export async function POST(req) {
     
     const data = await queryExecute("insert into new_match (title, time, id, nickname, count, lng, lat, address, text) values (?, ?, ?, ?, ?, ?, ?, ?, ?)", [qData.title, qData.time, qData.id, qData.nickname, qData.count, qData.lng, qData.lat, qData.address, qData.text])
     
-    await connection.end();
     return Response.json(data);
 }
 
 export async function GET() {
     let data = await queryExecute("select * from new_match");
     
-    await connection.end();
     return Response.json({data});
 }
