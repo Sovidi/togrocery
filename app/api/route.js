@@ -17,4 +17,4 @@ export async function queryExecute(str, value) {
 		});
 	});
 	return data;
-}
+};

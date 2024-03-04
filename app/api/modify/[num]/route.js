@@ -14,7 +14,7 @@ export async function PUT(req, {params}) {
     let qData = await req.json();
     let qData2 = Object.fromEntries(req.nextUrl.searchParams);
 
-    const data = await queryExecute("update new_match set title=?, time=?, count=?, lng=?, lat=?, address=?, text=? where id=? AND num=?", [qData.title, qData.time, qData.count, qData.lng, qData.lat, qData.address, qData.text, qData.id, params.num])
+    const data = await queryExecute("update new_match set title=?, time=?, count=?, lng=?, lat=?, address=?, text=? where id=? AND num=?", [qData.title, qData.time, qData.count, qData.lng, qData.lat, qData.address, qData.text, qData.id, params.num]);
 
     if (data.length > 0) return Response.json("바뀜");
     else {return Response.json("안바뀜")}
