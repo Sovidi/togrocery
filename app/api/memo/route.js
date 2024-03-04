@@ -22,7 +22,7 @@ export async function POST(req) {
 export async function DELETE(req) {
     const {id,num} = Object.fromEntries(  req.nextUrl.searchParams )
 
-    await queryExecute(`delete from memo where num in (${num})`)
+    await queryExecute(`delete from memo where num in (${num})`);
     const getData = await queryExecute("select * from memo where id=?",[id]);
 
     return Response.json(getData);

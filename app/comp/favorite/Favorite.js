@@ -27,14 +27,11 @@ function Favorite() {
     nickname = sessionStorage.getItem("nickname");
   }
 
-
   useEffect(() => {
-    loginCk()
-  })
-
+    loginCk();
+  });
 
   const checked = async (name) => {
-
     if (lover_list.includes(name)) {
       let a;
       let b=[];
@@ -43,14 +40,11 @@ function Favorite() {
       })
       const d = await axios.delete(`/api/favorite?id=${id}&num=${a}`)
       setFNum(d.data)
-
-
     } else {
       const a = await axios.post(`/api/favorite`, { id, name })
       setFNum(a.data)
     }
-  }
-
+  };
 
   const tap_click = (v) => {
     console.log(lover_list)
@@ -59,9 +53,8 @@ function Favorite() {
     lover_list.forEach((item) => {
       const a = data01.filter(obj => (obj.item_name == item))
       aa.push(...a)
-    })
-    setLover_Data(aa)
-
+    });
+    setLover_Data(aa);
 
     setTap(v);
     switch (v) {
@@ -73,23 +66,21 @@ function Favorite() {
         return setData_list(aa.filter((obj) => (obj.category_name === "축산물" || obj.category_name === "수산물")));
       case '버섯/가공':
         return setData_list(aa.filter((obj) => (obj.category_name === "식량작물" || obj.category_name === "특용작물")));
-    }
-  }
+    };
+  };
 
 
   useEffect(() => {
     setLover_list(fNum.map((v) => (v.name)))
-  }, [fNum])
-
-
+  }, [fNum]);
 
   useEffect(() => {
     tap_click('전체')
-  }, [contentsData, lover_list])
+  }, [contentsData, lover_list]);
 
   useEffect(() => {
     favStart()
-  }, [])
+  }, []);
 
 
   return (
